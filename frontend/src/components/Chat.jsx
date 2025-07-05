@@ -69,9 +69,13 @@ const Chat = () => {
 
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
-            <div className="message-content">
-              {message.sender === "bot" ? <ReactMarkdown>{message.text}</ReactMarkdown> : message.text}
-            </div>
+            {message.sender === "bot" ? (
+              <div className="message-bot message-content">
+                <ReactMarkdown>{message.text}</ReactMarkdown>
+              </div>
+            ) : (
+              <div className="message-user message-content">{message.text}</div>
+            )}
             <div className="message-time">{message.time}</div>
           </div>
         ))}
