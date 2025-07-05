@@ -1,0 +1,9 @@
+langchain-community
+openai
+langserve
+faiss-cpu
+fastapi
+uvicorn
+beautifulsoup4
+tiktoken
+PyMuPDF
