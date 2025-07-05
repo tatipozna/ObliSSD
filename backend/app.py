@@ -17,10 +17,9 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
-# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React development server
+    allow_origins=["http://localhost:3000"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,37 +33,32 @@ def load_pdf(file_path):
     return text
 
 def create_optimized_documents():
-    """Crea documentos con chunking optimizado para mejor retrieval"""
+    """Crea documentos con chunking optimizado para mejor retrieval combinando ambos enfoques"""
     documents = []
     
     pdf_producto = load_pdf("pdf/Catálogo de Productos.pdf")
     pdf_locales = load_pdf("pdf/Información de Locales.pdf")
     pdf_ubicaciones = load_pdf("pdf/Ubicación Física de Productos.pdf")
+
     
-    # Configuración diferente para cada tipo de documento
-    
-    # Para productos: chunks más grandes para mantener precio y descripción juntos
     product_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=400,  # Aumentado para mantener información completa del producto
-        chunk_overlap=100,
+        chunk_size=200,  
+        chunk_overlap=50,
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""]
     )
     
-    # Para ubicaciones: chunks medianos
     location_splitter = RecursiveCharacterTextSplitter(
         chunk_size=300,
         chunk_overlap=80,
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""]
     )
     
-    # Para locales: chunks grandes para mantener toda la info de cada sucursal junta
     store_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=600,  # Chunks más grandes para mantener información completa de sucursales
+        chunk_size=600,  
         chunk_overlap=150,
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""]
     )
     
-    # Procesar catálogo de productos
     catalogo_chunks = product_splitter.split_text(pdf_producto)
     for i, chunk in enumerate(catalogo_chunks):
         if chunk.strip():
@@ -74,7 +68,6 @@ def create_optimized_documents():
             )
             documents.append(doc)
     
-    # Procesar ubicaciones
     ubicaciones_chunks = location_splitter.split_text(pdf_ubicaciones)
     for i, chunk in enumerate(ubicaciones_chunks):
         if chunk.strip():
@@ -84,7 +77,6 @@ def create_optimized_documents():
             )
             documents.append(doc)
     
-    # Procesar información de locales
     locales_chunks = store_splitter.split_text(pdf_locales)
     for i, chunk in enumerate(locales_chunks):
         if chunk.strip():
@@ -103,10 +95,9 @@ vectorstore = FAISS.from_documents(documents, embeddings)
 
 llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.1)
 
-# Aumentar el número de chunks recuperados para mejor contexto
 retriever = vectorstore.as_retriever(
     search_type="similarity",
-    search_kwargs={"k": 12}  # Aumentado de 8 a 12
+    search_kwargs={"k": 12}  
 )
 
 from langchain.prompts import PromptTemplate
@@ -125,7 +116,6 @@ INSTRUCCIONES IMPORTANTES:
    - Proporciona dirección exacta
    - Horarios completos y precisos
    - Días de atención específicos
-   - CUIDADO: "todos los días" incluye domingos, "lunes a sábado" NO incluye domingos
 4. Para consultas de stock o disponibilidad: Revisa toda la información disponible
 5. Para preguntas sobre precios: Busca y compara todos los productos que cumplan los criterios
 
@@ -168,7 +158,6 @@ def debug_chunks():
     """Endpoint para verificar cómo se están dividiendo los documentos"""
     pdf_locales = load_pdf("pdf/Información de Locales.pdf")
     
-    # Usar el mismo splitter que para locales
     store_splitter = RecursiveCharacterTextSplitter(
         chunk_size=600,
         chunk_overlap=150,
@@ -179,7 +168,7 @@ def debug_chunks():
     
     return JSONResponse(content={
         "total_chunks": len(chunks),
-        "chunks_sample": chunks[:3],  # Mostrar primeros 3 chunks
+        "chunks_sample": chunks[:3],  
         "chunks_with_horarios": [chunk for chunk in chunks if any(word in chunk.lower() for word in ['horario', 'hora', 'abre', 'cierra', 'domingo', 'lunes'])]
     })
 
