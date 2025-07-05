@@ -1,149 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot SSD</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #2b5876, #4e4376);
-            color: #333;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #2b5876, #4e4376);
+        color: #333;
+      }
 
-        .chat-container {
-            width: 450px;
-            height: 650px;
-            background-color: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-        }
+      .chat-container {
+        width: 450px;
+        height: 650px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+      }
 
-        .chat-header {
-            background-color: #6a11cb;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 22px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+      .chat-header {
+        background-color: #6a11cb;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 22px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
 
-        .chat-header img {
-            height: 35px;
-            border-radius: 8px;
-            background-color: white;
-            padding: 4px;
-        }
+      .chat-header img {
+        height: 35px;
+        border-radius: 8px;
+        background-color: white;
+        padding: 4px;
+      }
 
-        .messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
+      .messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .input-container {
-            display: flex;
-            border-top: 1px solid #ddd;
-            background-color: #f9f9f9;
-        }
+      .input-container {
+        display: flex;
+        border-top: 1px solid #ddd;
+        background-color: #f9f9f9;
+      }
 
-        input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            font-size: 16px;
-            outline: none;
-            background-color: transparent;
-        }
+      input {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        font-size: 16px;
+        outline: none;
+        background-color: transparent;
+      }
 
-        button {
-            padding: 15px 30px;
-            background-color: #6a11cb;
-            color: white;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            border-radius: 10px;
-        }
+      button {
+        padding: 15px 30px;
+        background-color: #6a11cb;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 10px;
+      }
 
-        button:hover {
-            background-color: #4b0f8c;
-        }
+      button:hover {
+        background-color: #4b0f8c;
+      }
 
-        .user-message {
-            margin: 10px;
-            padding: 12px 18px;
-            border-radius: 15px;
-            background-color: #e3e3e3;
-            align-self: flex-end;
-            max-width: 75%;
-            text-align: right;
-        }
+      .user-message {
+        margin: 10px;
+        padding: 12px 18px;
+        border-radius: 15px;
+        background-color: #e3e3e3;
+        align-self: flex-end;
+        max-width: 75%;
+        text-align: right;
+      }
 
-        .bot-message {
-            margin: 10px;
-            padding: 12px 18px;
-            border-radius: 15px;
-            background-color: #6a11cb;
-            color: white;
-            align-self: flex-start;
-            max-width: 75%;
-        }
+      .bot-message {
+        margin: 10px;
+        padding: 12px 18px;
+        border-radius: 15px;
+        background-color: #6a11cb;
+        color: white;
+        align-self: flex-start;
+        max-width: 75%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="chat-container">
-        <div class="messages" id="messages"></div>
-        <div class="input-container">
-            <input type="text" id="user-input" placeholder="Write your query...">
-            <button onclick="submitQuery()">Submit</button>
-        </div>
+      <div class="messages" id="messages"></div>
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Write your query..." />
+        <button onclick="submitQuery()">Submit</button>
+      </div>
     </div>
 
     <script>
-        async function submitQuery() {
-            const input = document.getElementById('user-input');
-            const messages = document.getElementById('messages');
+      async function submitQuery() {
+        const input = document.getElementById("user-input");
+        const messages = document.getElementById("messages");
 
-            const userMessage = input.value;
-            if (!userMessage) return;
+        const userMessage = input.value;
+        if (!userMessage) return;
 
-            const queryDiv = document.createElement('div');
-            queryDiv.className = 'user-message';
-            queryDiv.textContent = userMessage;
-            messages.appendChild(queryDiv);
+        const queryDiv = document.createElement("div");
+        queryDiv.className = "user-message";
+        queryDiv.textContent = userMessage;
+        messages.appendChild(queryDiv);
 
-            const response = await fetch(`/chat?query=${userMessage}`);
-            const data = await response.json();
+        const response = await fetch(`/chat?query=${userMessage}`);
+        const data = await response.json();
 
-            const responseDiv = document.createElement('div');
-            responseDiv.className = 'bot-message';
-            responseDiv.innerHTML = data.respuesta;
-            messages.appendChild(responseDiv);
+        const responseDiv = document.createElement("div");
+        responseDiv.className = "bot-message";
+        responseDiv.innerHTML = data.respuesta;
+        messages.appendChild(responseDiv);
 
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-        }
+        input.value = "";
+        messages.scrollTop = messages.scrollHeight;
+      }
     </script>
-</body>
-
+  </body>
 </html>

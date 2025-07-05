@@ -1,0 +1,162 @@
+/* Responsive Utilities */
+
+/* Container queries for modern browsers */
+@container (max-width: 600px) {
+  .chat-container {
+    border-radius: 0;
+    height: 100vh;
+  }
+}
+
+/* Utility classes for responsive design */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* Responsive text sizes */
+.text-responsive {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.text-responsive-large {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+}
+
+.text-responsive-small {
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+}
+
+/* Responsive spacing */
+.spacing-responsive {
+  padding: clamp(0.5rem, 3vw, 2rem);
+}
+
+.spacing-responsive-small {
+  padding: clamp(0.3rem, 1.5vw, 1rem);
+}
+
+/* Safe area insets for devices with notches */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Responsive grid system */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Responsive flexbox utilities */
+.flex-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .flex-responsive {
+    flex-direction: row;
+  }
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .chat-container {
+    border: 2px solid white;
+  }
+
+  .message-content {
+    border: 1px solid currentColor;
+  }
+
+  .input-container input {
+    border: 1px solid white;
+  }
+
+  .input-container button {
+    border: 1px solid white;
+  }
+}
+
+/* Print styles */
+@media print {
+  .chat-container {
+    border: 1px solid #000;
+    background: white;
+    color: black;
+  }
+
+  .input-form {
+    display: none;
+  }
+
+  .chat-header {
+    background: white;
+    color: black;
+    border-bottom: 1px solid #000;
+  }
+
+  .message-content {
+    background: white;
+    color: black;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+}
