@@ -22,7 +22,6 @@ const Chat = () => {
 
     const userMessage = inputValue.trim();
 
-    // Add user message to chat
     setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
     setInputValue("");
     setIsLoading(true);
@@ -30,7 +29,6 @@ const Chat = () => {
     try {
       const response = await chatService.sendMessage(userMessage);
 
-      // Add bot response to chat
       setMessages((prev) => [...prev, { text: response.respuesta, sender: "bot" }]);
     } catch (error) {
       console.error("Error al conectar con el servidor:", error);

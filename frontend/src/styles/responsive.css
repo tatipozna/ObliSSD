@@ -1,6 +1,4 @@
-/* Responsive Utilities */
 
-/* Container queries for modern browsers */
 @container (max-width: 600px) {
   .chat-container {
     border-radius: 0;
@@ -8,7 +6,6 @@
   }
 }
 
-/* Utility classes for responsive design */
 .mobile-only {
   display: none;
 }
@@ -27,7 +24,6 @@
   }
 }
 
-/* Responsive text sizes */
 .text-responsive {
   font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
@@ -40,7 +36,6 @@
   font-size: clamp(0.75rem, 2vw, 0.9rem);
 }
 
-/* Responsive spacing */
 .spacing-responsive {
   padding: clamp(0.5rem, 3vw, 2rem);
 }
@@ -49,7 +44,6 @@
   padding: clamp(0.3rem, 1.5vw, 1rem);
 }
 
-/* Safe area insets for devices with notches */
 .safe-area-top {
   padding-top: env(safe-area-inset-top);
 }
@@ -66,7 +60,6 @@
   padding-right: env(safe-area-inset-right);
 }
 
-/* Responsive grid system */
 .grid-responsive {
   display: grid;
   grid-template-columns: 1fr;
@@ -85,7 +78,6 @@
   }
 }
 
-/* Responsive flexbox utilities */
 .flex-responsive {
   display: flex;
   flex-direction: column;
@@ -98,7 +90,6 @@
   }
 }
 
-/* Performance optimizations */
 .will-change-transform {
   will-change: transform;
 }
@@ -107,7 +98,6 @@
   will-change: opacity;
 }
 
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -116,7 +106,6 @@
   }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   .chat-container {
     border: 2px solid white;
@@ -135,7 +124,6 @@
   }
 }
 
-/* Print styles */
 @media print {
   .chat-container {
     border: 1px solid #000;

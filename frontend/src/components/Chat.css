@@ -260,7 +260,6 @@
   }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .chat-container {
     max-width: 100%;
@@ -447,7 +446,6 @@
   }
 }
 
-/* Landscape orientation fixes */
 @media (max-height: 500px) and (orientation: landscape) {
   .chat-container {
     height: 100vh;
@@ -479,7 +477,6 @@
   }
 }
 
-/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .input-container button:hover {
     transform: none;
@@ -501,7 +498,6 @@
   }
 }
 
-/* High DPI displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .chat-container {
     border-width: 0.5px;
@@ -512,7 +508,6 @@
   }
 }
 
-/* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   .message,
   .typing-indicator span,
@@ -526,7 +521,6 @@
   }
 }
 
-/* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .message.bot .message-content {
     background: rgba(255, 255, 255, 0.15);
@@ -547,14 +541,12 @@
   }
 }
 
-/* Focus management for keyboard navigation */
 .input-container input:focus,
 .input-container button:focus {
   outline: 2px solid rgba(255, 255, 255, 0.8);
   outline-offset: 2px;
 }
 
-/* Improved scrollbar for webkit browsers */
 .messages-container::-webkit-scrollbar {
   width: 8px;
 }
