@@ -30,7 +30,7 @@ combined_texts = [pdf_producto, pdf_locales, pdf_ubicaciones]
 embeddings = OpenAIEmbeddings()
 vectorstore = FAISS.from_texts(combined_texts, embeddings)
 
-llm = ChatOpenAI(model_name="gpt-4.1-2025-04-14")
+llm = ChatOpenAI(model_name="gpt-4.1-nano-2025-04-14")
 
 retriever = vectorstore.as_retriever()
 answer_bot = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
