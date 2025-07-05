@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import { chatService } from "../services/api";
 import "./Chat.css";
 
@@ -21,21 +22,24 @@ const Chat = () => {
     if (!inputValue.trim()) return;
 
     const userMessage = inputValue.trim();
+    const currentTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-    setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
+    setMessages((prev) => [...prev, { text: userMessage, sender: "user", time: currentTime }]);
     setInputValue("");
     setIsLoading(true);
 
     try {
       const response = await chatService.sendMessage(userMessage);
+      const botTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-      setMessages((prev) => [...prev, { text: response.respuesta, sender: "bot" }]);
+      setMessages((prev) => [...prev, { text: response.respuesta, sender: "bot", time: botTime }]);
     } catch (error) {
       console.error("Error al conectar con el servidor:", error);
+      const errorTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
       setMessages((prev) => [
         ...prev,
-        { text: error.message || "Error al conectar con el servidor", sender: "bot" },
+        { text: error.message || "Error al conectar con el servidor", sender: "bot", time: errorTime },
       ]);
     } finally {
       setIsLoading(false);
@@ -65,10 +69,10 @@ const Chat = () => {
 
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
-            <div className="message-content">{message.text}</div>
-            <div className="message-time">
-              {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+            <div className="message-content">
+              {message.sender === "bot" ? <ReactMarkdown>{message.text}</ReactMarkdown> : message.text}
             </div>
+            <div className="message-time">{message.time}</div>
           </div>
         ))}
 

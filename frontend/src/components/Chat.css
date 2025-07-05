@@ -567,3 +567,125 @@
   background: rgba(255, 255, 255, 0.5);
   background-clip: padding-box;
 }
+
+/* Estilos específicos para Markdown en mensajes del bot */
+.message.bot .message-content h1,
+.message.bot .message-content h2,
+.message.bot .message-content h3,
+.message.bot .message-content h4,
+.message.bot .message-content h5,
+.message.bot .message-content h6 {
+  margin: 0.5rem 0;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.message.bot .message-content h1 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.25rem;
+}
+
+.message.bot .message-content h2 {
+  font-size: 1.3rem;
+  color: #2980b9;
+}
+
+.message.bot .message-content h3 {
+  font-size: 1.1rem;
+  color: #34495e;
+}
+
+.message.bot .message-content p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.message.bot .message-content ul,
+.message.bot .message-content ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.message.bot .message-content li {
+  margin: 0.25rem 0;
+  line-height: 1.5;
+}
+
+.message.bot .message-content code {
+  background-color: #f8f9fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  color: #e74c3c;
+  border: 1px solid #e9ecef;
+}
+
+.message.bot .message-content pre {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.message.bot .message-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  color: #333;
+}
+
+.message.bot .message-content blockquote {
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid #3498db;
+  background-color: #f8f9fa;
+  font-style: italic;
+}
+
+.message.bot .message-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+.message.bot .message-content th,
+.message.bot .message-content td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.message.bot .message-content th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.message.bot .message-content strong {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.message.bot .message-content em {
+  font-style: italic;
+  color: #34495e;
+}
+
+.message.bot .message-content a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.message.bot .message-content a:hover {
+  text-decoration: underline;
+}
+
+.message.bot .message-content hr {
+  border: none;
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 1rem 0;
+}
